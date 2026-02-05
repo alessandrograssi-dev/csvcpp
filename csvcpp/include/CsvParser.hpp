@@ -1,10 +1,11 @@
 #ifndef CSV_PARSER_HPP
 #define CSV_PARSER_HPP
 
-#include <cstddef>
 #include <initializer_list>
 #include <memory>
-#include <stdexcept>
+#include <vector>
+#include <cstdio>
+#include <cstddef>
 
 namespace csv {
 
@@ -68,16 +69,17 @@ namespace csv {
      */
     CsvParser(unsigned char delim, unsigned char quote, Options options);
 
-    ~CsvParser();
+    CsvParser(const CsvParser&) = delete;
+    CsvParser& operator=(const CsvParser&) = delete;
 
     // ------------------------------------------------------------------
     // Configuration
     // ------------------------------------------------------------------
 
-    unsigned char get_delimiter() const;
+    unsigned char get_delimiter() const noexcept;
     void set_delimiter(unsigned char c);
 
-    unsigned char get_quote() const;
+    unsigned char get_quote() const noexcept;
     void set_quote(unsigned char c);
 
     void set_space_func(int (*f)(unsigned char));
@@ -102,8 +104,8 @@ namespace csv {
      */
     void set_block_size(std::size_t size);
 
-    std::size_t get_block_size() const;
-    std::size_t get_buffer_size() const;
+    std::size_t get_block_size() const noexcept;
+    std::size_t get_buffer_size() const noexcept;
 
     // ------------------------------------------------------------------
     // CSV writing
@@ -162,7 +164,7 @@ namespace csv {
      *
      * @throws std::runtime_error on parsing errors or memory failures
      */
-    std::size_t parse(
+    [[nodiscard]] std::size_t parse(
       const void *s,
       std::size_t len,
       void (*cb1)(void *, std::size_t, void *),
@@ -185,7 +187,7 @@ namespace csv {
 
   private:
     struct impl;
-    std::unique_ptr<impl> m_impl;
+    std::unique_ptr<impl> m_pimpl;
   };
 
 } // namespace csv
