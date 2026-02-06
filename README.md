@@ -1,8 +1,8 @@
-# csvcpp
+# libcsvcpp
 
 **Modern C++ wrapper around a legacy C CSV parsing library**
 
-csvcpp is a modern C++17 library that wraps and modernizes a legacy C CSV parser (libcsv),
+libcsvcpp is a modern C++17 library that wraps and modernizes a legacy C CSV parser (libcsv),
 providing a **safe, exception-based, type-aware C++ interface** while preserving the original
 parser’s behavior and correctness.
 
@@ -46,7 +46,7 @@ API design, and test parity.
 ## Project Structure
 
 ```
-csvcpp/
+./
 ├── legacy/             # Original C CSV implementation (vendored)
 ├── csvcpp/             # Modern C++ wrapper
 ├── examples/           # Example usage
@@ -147,6 +147,45 @@ From a reviewer or recruiter perspective, this project highlights:
 - Strong testing discipline and backward compatibility
 - Clean project structure and build configuration
 - Attention to real-world constraints over toy implementations
+
+---
+
+## About the Original libcsv Library
+
+This project wraps the **libcsv** C library.
+
+### Original Library Information
+
+- **License**: LGPL (GNU Lesser General Public License)
+- **Package availability**: Available in many Linux distributions as `libcsv3` and `libcsv-dev`
+- **Documentation**: See `legacy/` directory for original man pages and PDF documentation
+- **Language bindings**: Ruby (Rcsv), and now C++ (this project)
+
+The original libcsv library provides a robust, streaming CSV parser that:
+- Handles RFC 4180 compliant CSV files
+- Supports custom delimiters and quote characters
+- Provides incremental parsing with callbacks
+- Includes CSV writing/escaping utilities
+
+### Why Wrap Instead of Rewrite?
+
+The original libcsv has been:
+- **Field-tested** across numerous production systems
+- **Package-maintained** by major Linux distributions
+- **Proven correct** through years of use
+
+Rather than introducing new bugs through a rewrite, this project demonstrates 
+**safe modernization** by adding a C++17 interface while preserving the original 
+parser's proven correctness.
+
+### Vendored Code
+
+The `legacy/` directory contains an unmodified copy of libcsv. This ensures:
+- Build self-containment (no external dependencies)
+- Behavioral verification (test parity validation)
+- Stable reference implementation
+
+For the original source and updates, see your distribution's libcsv package.
 
 ---
 
