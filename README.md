@@ -1,3 +1,8 @@
+![Build](https://github.com/alessandrograssi-dev/csvcpp/actions/workflows/build.yml/badge.svg)
+![Parity](https://github.com/alessandrograssi-dev/csvcpp/actions/workflows/test-parity.yml/badge.svg)
+![Static Analysis](https://github.com/alessandrograssi-dev/csvcpp/actions/workflows/quality.yml/badge.svg)
+![Release](https://img.shields.io/github/v/release/alessandrograssi-dev/csvcpp)
+![License](https://img.shields.io/github/license/alessandrograssi-dev/csvcpp)
 # libcsvcpp
 
 **Modern C++ wrapper around a legacy C CSV parsing library**
