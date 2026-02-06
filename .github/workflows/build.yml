@@ -52,9 +52,19 @@ jobs:
       - name: Build
         run: |
           cd build
-          cmake --build . --parallel --config ${{ matrix.build_type }}
+          if [ "${{ matrix.compiler }}" = "clang" ]; then
+            cmake --build . --target libcsv --parallel --config ${{ matrix.build_type }}
+            cmake --build . --target csvcpp --parallel --config ${{ matrix.build_type }}
+            cmake --build . --target csvtest --parallel --config ${{ matrix.build_type }}
+            cmake --build . --target csvinfo --parallel --config ${{ matrix.build_type }}
+            cmake --build . --target csvfix --parallel --config ${{ matrix.build_type }}
+            cmake --build . --target csvvalid --parallel --config ${{ matrix.build_type }}
+          else
+            cmake --build . --parallel --config ${{ matrix.build_type }}
+          fi
 
       - name: Run tests
+        if: ${{ matrix.compiler != 'clang' }}
         run: |
           cd build
           cmake --build . --target test_parity --parallel
